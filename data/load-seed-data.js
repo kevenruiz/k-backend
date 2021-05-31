@@ -1,8 +1,10 @@
+/* eslint-disable indent */
 /* eslint-disable no-console */
 import client from '../lib/client.js';
 // import our seed data:
 import users from './users.js';
-import cats from './cats.js';
+import cocktails from './cats.js';
+
 
 run();
 
@@ -24,12 +26,12 @@ async function run() {
     const user = data[0].rows[0];
 
     await Promise.all(
-      cats.map(cat => {
+      cocktails.map(cocktail => {
         return client.query(`
-        INSERT INTO cats (name, type, url, year, lives, is_sidekick, user_id)
+        INSERT INTO cocktails (name, type, url, year, lives, is_sidekick, user_id)
         VALUES ($1, $2, $3, $4, $5, $6, $7)
         `,
-        [cat.name, cat.type, cat.url, cat.year, cat.lives, cat.isSidekick, user.id]);
+          [cocktail.name, cocktail.type, cocktail.url, cocktail.year, cocktail.lives, cocktail.isSidekick, user.id]);
       })
     );
     
